@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace PROGPOE
 {
@@ -69,49 +70,63 @@ namespace PROGPOE
             {
 
 
-                if (anObj.Measurements[i] == "ml" || anObj.Measurements[i] == ("mililitre") && anObj.Quantities[i] >= 1000)
+                switch (anObj.Measurements[i])
                 {
-                    anObj.Measurements[i] = "litres";
-                    anObj.Quantities[i] = anObj.Quantities[i] / 1000;
+                    case "ml":
+                    case "mililitre" when anObj.Quantities[i] >= 1000:
+                        anObj.Measurements[i] = "litres";
+                        anObj.Quantities[i] = anObj.Quantities[i] / 1000;
 
-                }
-                else if (anObj.Measurements[i] == ("l") || anObj.Measurements[i] == ("litre") && anObj.Quantities[i] < 1)
-                {
-                    anObj.Measurements[i] = "mililitre";
-                    anObj.Quantities[i] = anObj.Quantities[i] * 1000;
+                        break;
+                    case "l":
+                    case "litre" when anObj.Quantities[i] < 1:
+                        anObj.Measurements[i] = "mililitre";
+                        anObj.Quantities[i] = anObj.Quantities[i] * 1000;
 
-                }
-                else if (anObj.Measurements[i] == ("tbsp") || anObj.Measurements[i] == ("tablespoon") && anObj.Quantities[i] >= 16)
-                {
-                    anObj.Measurements[i] = "cup";
-                    anObj.Quantities[i] = anObj.Quantities[i] / 16;
+                        break;
+                    case "tbsp":
+                    case "tablespoon" when anObj.Quantities[i] >= 16:
+                        anObj.Measurements[i] = "cup";
+                        anObj.Quantities[i] = anObj.Quantities[i] / 16;
 
-                }
-                else if (anObj.Measurements[i] == ("cup") && anObj.Quantities[i] < 1)
-                {
-                    anObj.Measurements[i] = "tablespoon";
-                    anObj.Quantities[i] = anObj.Quantities[i] * 16;
+                        break;
+                    case "cup" when anObj.Quantities[i] < 1:
+                        anObj.Measurements[i] = "tablespoon";
+                        anObj.Quantities[i] = anObj.Quantities[i] * 16;
 
-                }
-                else if (anObj.Measurements[i] == ("g") || anObj.Measurements[i] == ("gram") && anObj.Quantities[i] >= 1000)
-                {
-                    anObj.Measurements[i] = "kilogram";
-                    anObj.Quantities[i] = anObj.Quantities[i] / 1000;
+                        break;
+                    case "g":
+                    case "gram" when anObj.Quantities[i] >= 1000:
+                        anObj.Measurements[i] = "kilogram";
+                        anObj.Quantities[i] = anObj.Quantities[i] / 1000;
 
-                }
-                else if (anObj.Measurements[i] == ("kilogram") && anObj.Quantities[i] < 1)
-                {
-                    anObj.Measurements[i] = "gram";
-                    anObj.Quantities[i] = anObj.Quantities[i] * 1000;
+                        break;
+                    case "kilogram" when anObj.Quantities[i] < 1:
+                        anObj.Measurements[i] = "gram";
+                        anObj.Quantities[i] = anObj.Quantities[i] * 1000;
 
-                }
-                else
-                {
-
+                        break;
+                    default:
+                        break;
                 }
 
 
             }
         }
+
+        public static void DisplayList()
+        {
+            if (ListWork.recipeList.Count > 0) {
+
+                for (int i = 0; i < ListWork.recipeList.Count; i++) {
+
+                    Console.WriteLine(i+1 + ". " + ListWork.recipeList[i].RecipeName);
+                }
+            
+            }
+            else { Console.WriteLine("There are no recipes currently"); }
+
+           }
+
     }
 }
