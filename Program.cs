@@ -106,9 +106,9 @@ namespace PROGPOE
                         }
                         if (ListWork.recipeList.Count>0)
                         {
-
+                            Console.WriteLine("Pick a Recipe to display Fully");
                             Recipe.DisplayList();
-                            int displayFully = InputMethods.numbervalidation("pick a Recipe to display Fully", 0, ListWork.recipeList.Count);
+                            int displayFully = InputMethods.numbervalidation(("Pick a Recipe to display Fully. Options 1 to " + ListWork.recipeList.Count), 0, ListWork.recipeList.Count);
                             Console.WriteLine(ListWork.recipeList[displayFully-1].ToString());
                         }
                         //Changed error messages to red colour                       
