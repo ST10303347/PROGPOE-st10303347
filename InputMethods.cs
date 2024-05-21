@@ -98,7 +98,7 @@ namespace PROGPOE
 
             return finalmeasure;
         }
-        public static double QuantityValid(String msg)
+        public static double QuantityandCalorieValid(String msg, String QuantityorCalorie)
         {
 
             double finalChoice = 0;
@@ -108,7 +108,8 @@ namespace PROGPOE
 
             while (!correctInput)
             {
-                Console.Write("Quantity: ");
+                //This method can be used to validate quantities or calories since they both want a double back thats just valid, 
+                Console.Write(QuantityorCalorie + ": ");
                 userInput = Console.ReadLine();
 
                 try
@@ -120,7 +121,7 @@ namespace PROGPOE
 
                     if (DUserInput >= double.MinValue && DUserInput <= double.MaxValue)
                     {
-                        Console.Clear();
+                       
                         finalChoice = DUserInput;
                         correctInput = true;
                         Console.ResetColor();
@@ -143,6 +144,7 @@ namespace PROGPOE
 
             return finalChoice;
         }
+       
 
     }
 }

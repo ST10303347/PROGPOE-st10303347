@@ -15,7 +15,7 @@ namespace PROGPOE
             Boolean screenON = true;
             String[] emptyarr = { };
             double[] emptyarr2 = { };
-            Recipe testOB = new Recipe(" ", emptyarr, emptyarr2, emptyarr, emptyarr);
+            Recipe testOB = new Recipe(" ", emptyarr, emptyarr2, emptyarr, emptyarr, emptyarr2);
             double scale = 1;
             double newScale = 1;
 
@@ -51,6 +51,7 @@ namespace PROGPOE
                             String[] ingredientsArr = new String[noOfIngredients];
                             double[] QuantitiesArr = new double[noOfIngredients];
                             String[] ingMeasurementArr = new String[noOfIngredients];
+                            double[] CaloriesArr = new double[noOfIngredients];
                             Console.Clear();
                             //Clear method keeps screen neat
                             for (int i = 0; i < noOfIngredients; i++)
@@ -64,11 +65,15 @@ namespace PROGPOE
                                 String ingMeasurement = InputMethods.measurementValidation();
                                 //Quantity is verified using Double.min and max methods in Input methods class                             
 
-
-                                double quantity = InputMethods.QuantityValid("Please enter the quantity of your ingredients");
+                           
+                                double quantity = InputMethods.QuantityandCalorieValid("Please enter the quantity of your ingredients", "Quantity");
+                                double ingCalories = InputMethods.QuantityandCalorieValid("Please enter the number of calories for this item", "Calories");
                                 ingredientsArr[i] = ingName;
                                 ingMeasurementArr[i] = ingMeasurement;
                                 QuantitiesArr[i] = quantity;
+                                CaloriesArr[i] = ingCalories;
+                                double totalCalories = 0;
+                           
                                 Console.Clear();
 
                             }
@@ -85,7 +90,7 @@ namespace PROGPOE
 
 
                             }
-                            testOB = new Recipe(name, ingredientsArr, QuantitiesArr, ingMeasurementArr, stepsArr);
+                            testOB = new Recipe(name, ingredientsArr, QuantitiesArr, ingMeasurementArr, stepsArr, CaloriesArr);
 
                             ListWork.recipeList.Add(testOB);
 

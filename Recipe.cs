@@ -15,15 +15,18 @@ namespace PROGPOE
         public double[] Quantities { get; set; }
         public String[] Measurements { get; set; }
         public Array RecipeSteps { get; set; }
+        public double[] Calories { get; set; }
 
 
-        public Recipe(string recipeName, string[] ingredients, double[] quantities, string[] measurements, Array recipeSteps)
+
+        public Recipe(string recipeName, string[] ingredients, double[] quantities, string[] measurements, Array recipeSteps, double[] calories)
         {
             RecipeName = recipeName;
             Ingredients = ingredients;
             Quantities = quantities;
             Measurements = measurements;
             RecipeSteps = recipeSteps;
+            Calories = calories;
         }
 
         public override string ToString()
@@ -32,15 +35,19 @@ namespace PROGPOE
             //neat to string for displaying my recipe 
             StringBuilder finalString = new StringBuilder();
             finalString.AppendLine("Recipe Name: " + RecipeName);
-            finalString.AppendLine("\nIngredients ");
+            finalString.AppendLine("\nIngredients\n ");
+
+            //I used negative alignment numbers to align it left positive numbers were aligning text right
+            finalString.AppendLine(string.Format("{0,-5} {1,-20} {2,-15} {3,-10}", "No.", "Ingredient", "Quantity", "Calories"));
 
             for (int i = 0; i < Ingredients.Length; i++)
             {
                 int n = i + 1;
-                finalString.AppendLine(n + ". " + Quantities.GetValue(i) + " " + Measurements.GetValue(i) + " of " + Ingredients.GetValue(i));
+                
+                finalString.AppendLine(string.Format("{0,-5} {1,-20} {2,-15} {3,-10}", n, Ingredients[i], $"{Quantities[i]} {Measurements[i]}", $"{Calories[i]} Calories"));
+            }  
 
 
-            }
             finalString.AppendLine("\nRecipe Steps: ");
             for (int i = 0; i < RecipeSteps.Length; i++)
             {
