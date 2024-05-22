@@ -39,14 +39,14 @@ namespace PROGPOE
 
             //I used negative alignment numbers to align it left positive numbers were aligning text right
             finalString.AppendLine(string.Format("{0,-5} {1,-20} {2,-15} {3,-10}", "No.", "Ingredient", "Quantity", "Calories"));
-
+   
             for (int i = 0; i < Ingredients.Length; i++)
             {
                 int n = i + 1;
                 
                 finalString.AppendLine(string.Format("{0,-5} {1,-20} {2,-15} {3,-10}", n, Ingredients[i], $"{Quantities[i]} {Measurements[i]}", $"{Calories[i]} Calories"));
             }  
-
+            
 
             finalString.AppendLine("\nRecipe Steps: ");
             for (int i = 0; i < RecipeSteps.Length; i++)
@@ -136,6 +136,18 @@ namespace PROGPOE
             else { Console.WriteLine("There are no recipes currently"); }
 
            }
+        public static double listTotal(List<double> thelst) { 
+        double total = 0;
+        foreach (double number in thelst)
+            {
+                total += number;  
 
+
+            }
+        return total;
+        
+        
+        
+        }
     }
 }

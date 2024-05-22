@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace PROGPOE
 {
@@ -53,8 +54,9 @@ namespace PROGPOE
                             String[] ingMeasurementArr = new String[noOfIngredients];
                             double[] CaloriesArr = new double[noOfIngredients];
                             Console.Clear();
-                            //Clear method keeps screen neat
-                            for (int i = 0; i < noOfIngredients; i++)
+                        //Clear method keeps screen neat
+                        double totalCalories = 0;
+                        for (int i = 0; i < noOfIngredients; i++)
                             {
 
                                 int n = 1 + i;
@@ -72,9 +74,18 @@ namespace PROGPOE
                                 ingMeasurementArr[i] = ingMeasurement;
                                 QuantitiesArr[i] = quantity;
                                 CaloriesArr[i] = ingCalories;
-                                double totalCalories = 0;
-                           
-                                Console.Clear();
+
+                            totalCalories += ingCalories; // Update the total calories
+
+                            // Check if totalCalories exceed 500 and display a warning
+                            if (totalCalories > 500)
+                            {
+                                MessageBox.Show("Warning: We have now exceeded 500 calories \nCurrent calorie count : " + totalCalories);
+                                
+                                Console.WriteLine("Press any key to continue.");
+                                Console.ReadKey();
+                            }
+                            Console.Clear();
 
                             }
                             //the number of steps becomes the array size and prompts you to fill the array
@@ -115,8 +126,9 @@ namespace PROGPOE
                             Console.WriteLine("Pick a Recipe to display Fully");
                             var sortedRecipes = ListWork.recipeList.OrderBy(r => r.RecipeName).ToList();
                             Recipe.DisplayList(sortedRecipes);
-                            int displayFully = InputMethods.numbervalidation(("Pick a Recipe to display Fully. Options 1 to " + sortedRecipes.Count), 0,sortedRecipes.Count);
-                            Console.WriteLine(sortedRecipes[displayFully-1].ToString());
+                            int displayFully = InputMethods.numbervalidation(("Pick a Recipe to display Fully. Options 1 to " + sortedRecipes.Count), 1,sortedRecipes.Count);
+                            displayFully--;
+                            Console.WriteLine(sortedRecipes[displayFully].ToString());
                         }
                         //Changed error messages to red colour                       
                         else
