@@ -64,7 +64,9 @@ namespace PROGPOE
             for (int i = 0; i < myRecipe.Quantities.Length; i++)
             {
                 myRecipe.Quantities[i] /= currentScale;
+                myRecipe.Calories[i] /= currentScale;   
                 myRecipe.Quantities[i] *= newScale;
+                myRecipe.Calories[i] *= newScale;   
             }
 
 
@@ -121,13 +123,13 @@ namespace PROGPOE
             }
         }
 
-        public static void DisplayList()
+        public static void DisplayList(List<Recipe> recipes)
         {
             if (ListWork.recipeList.Count > 0) {
 
                 for (int i = 0; i < ListWork.recipeList.Count; i++) {
 
-                    Console.WriteLine(i+1 + ". " + ListWork.recipeList[i].RecipeName);
+                    Console.WriteLine(i+1 + ". " + recipes[i].RecipeName);
                 }
             
             }

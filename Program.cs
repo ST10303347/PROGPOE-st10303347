@@ -109,12 +109,14 @@ namespace PROGPOE
                         {
                             Recipe.measurementConversion(item);
                         }
+
                         if (ListWork.recipeList.Count>0)
                         {
                             Console.WriteLine("Pick a Recipe to display Fully");
-                            Recipe.DisplayList();
-                            int displayFully = InputMethods.numbervalidation(("Pick a Recipe to display Fully. Options 1 to " + ListWork.recipeList.Count), 0, ListWork.recipeList.Count);
-                            Console.WriteLine(ListWork.recipeList[displayFully-1].ToString());
+                            var sortedRecipes = ListWork.recipeList.OrderBy(r => r.RecipeName).ToList();
+                            Recipe.DisplayList(sortedRecipes);
+                            int displayFully = InputMethods.numbervalidation(("Pick a Recipe to display Fully. Options 1 to " + sortedRecipes.Count), 0,sortedRecipes.Count);
+                            Console.WriteLine(sortedRecipes[displayFully-1].ToString());
                         }
                         //Changed error messages to red colour                       
                         else
@@ -125,6 +127,31 @@ namespace PROGPOE
                         Console.WriteLine("Press any key to continue.");
                         Console.ReadKey();
                         break;
+                    case 3:
+                        if (ListWork.recipeList.Count > 0) {
+                        
+                        
+                        
+                        
+                        }
+                        else { 
+                        
+                        
+                        
+                        }
+
+
+
+
+
+                        break;
+                    case 4: break;
+                        if (ListWork.recipeList.Count > 0) { }
+                        else { }
+                    case 5: break;
+                        if (ListWork.recipeList.Count > 0) { }
+                        else { }
+                    case 6: break;
                 }
                 }
         }
