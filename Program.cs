@@ -63,7 +63,6 @@ namespace PROGPOE
                                 Console.Write("Ingredient " + n + "\nName: ");
                                 String ingName = Console.ReadLine();
 
-
                                 String ingMeasurement = InputMethods.measurementValidation();
                                 //Quantity is verified using Double.min and max methods in Input methods class                             
 
