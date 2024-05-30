@@ -59,18 +59,7 @@ namespace PROGPOE
             double totalCalories = Recipe.listTotal( Calories);
             string color;
 
-            if (totalCalories <= 299)
-            {
-                Console.ForegroundColor = ConsoleColor.Green;
-            }
-            else if (totalCalories <= 499)
-            {
-                Console.ForegroundColor= ConsoleColor.Yellow;
-            }
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-            }
+           
 
             finalString.AppendLine("\n"+"Total Calories: "+totalCalories);
             Console.ForegroundColor = ConsoleColor.White;
@@ -82,6 +71,29 @@ namespace PROGPOE
                 int n = i + 1;
                 finalString.AppendLine("Step " + n + ": " + RecipeSteps[i]);
 
+            }
+            finalString.AppendLine();
+
+    //Calorie paragraphs are ai generated i just wrote the code
+            if (totalCalories <= 100) {
+
+
+                finalString.AppendLine("These light snacks and small meals are perfect for those looking to maintain a low-calorie diet or find healthy snack options throughout the day. They are ideal for those aiming to lose weight as they offer nutrient-rich choices without adding too many calories. Options like a medium apple, hard-boiled egg, or a cup of strawberries provide essential vitamins and fiber while keeping calorie intake minimal. These foods can be enjoyed individually or combined to create satisfying, low-calorie meals.");
+
+
+            }
+
+                if (totalCalories >100&&totalCalories <=200)
+            {
+                finalString.AppendLine("This range includes light meals and snacks that provide a bit more substance while still being low in calories. Perfect for weight loss or maintaining a balanced diet, these options include a medium banana, a serving of hummus with carrot sticks, or a low-fat cheese stick. They offer a mix of proteins, healthy fats, and carbohydrates to keep you energized without overloading on calories. These foods are great for in-between meals or as part of a light breakfast or lunch.");
+            }
+            else if (totalCalories > 200 && totalCalories <= 400)
+            {
+                finalString.AppendLine("Meals and snacks in this calorie range are more substantial and can serve as main components of a balanced diet. They include options like oatmeal, a grilled chicken breast, or a turkey sandwich. These foods are ideal for those looking to maintain or gradually lose weight while still enjoying satisfying and nutritious meals. This range provides a good balance of protein, fiber, and healthy fats, ensuring you stay full and energized throughout the day without excessive calorie intake.");
+            }
+            else if(totalCalories >=400)
+            {
+                finalString.AppendLine("These meals are more calorie-dense and can be part of a well-rounded diet when consumed in moderation. They include dishes like grilled chicken Caesar salad, spaghetti with marinara sauce, or a cheeseburger. While higher in calories, these meals can be balanced with lighter snacks and meals throughout the day. They provide the necessary energy and nutrients for those with higher calorie needs or for occasions when a more filling meal is desired. For those managing their weight, portion control and mindful eating are key when enjoying these more calorie-rich foods.");
             }
 
             return finalString.ToString();
@@ -166,11 +178,26 @@ namespace PROGPOE
            }
         public static double listTotal(List<double> thelst) { 
         double total = 0;
-        foreach (double number in thelst)
+
+            try
             {
-                total += number;  
+                foreach (double number in thelst)
+                {
+                    total += number;
 
 
+                }
+            }
+            catch (NullReferenceException ex)
+            {
+
+                return 0;
+            }
+
+            if (total <= 0 ) {
+
+                return 0;
+            
             }
         return total;
 
