@@ -11,15 +11,14 @@ namespace PROGPOE
     {
         public String RecipeName { get; set; }
 
-        public String[] Ingredients { get; set; }
-        public double[] Quantities { get; set; }
-        public String[] Measurements { get; set; }
-        public Array RecipeSteps { get; set; }
-        public double[] Calories { get; set; }
+        public List<String> Ingredients { get; set; }
+        public List<double> Quantities { get; set; }
+        public List<String> Measurements { get; set; }
+        public List<String> RecipeSteps { get; set; }
+        public List<double> Calories { get; set; }
+        public List<String> FoodGroup { get; set; }
 
-
-
-        public Recipe(string recipeName, string[] ingredients, double[] quantities, string[] measurements, Array recipeSteps, double[] calories)
+        public Recipe(string recipeName, List<string> ingredients, List<double> quantities, List<string> measurements, List<string> recipeSteps, List<double> calories, List<string> foodGroup)
         {
             RecipeName = recipeName;
             Ingredients = ingredients;
@@ -27,6 +26,7 @@ namespace PROGPOE
             Measurements = measurements;
             RecipeSteps = recipeSteps;
             Calories = calories;
+            FoodGroup = foodGroup;
         }
 
         public override string ToString()
@@ -38,21 +38,44 @@ namespace PROGPOE
             finalString.AppendLine("\nIngredients\n ");
 
             //I used negative alignment numbers to align it left positive numbers were aligning text right
-            finalString.AppendLine(string.Format("{0,-5} {1,-20} {2,-15} {3,-10}", "No.", "Ingredient", "Quantity", "Calories"));
+            finalString.AppendLine(string.Format("{0,-5} {1,-20} {2,-15} {3,-35} {4,-10}", "No.", "Ingredient", "Quantity", "FoodGroup", "Calories"));
    
-            for (int i = 0; i < Ingredients.Length; i++)
+            for (int i = 0; i < Ingredients.Count; i++)
             {
                 int n = i + 1;
-                
-                finalString.AppendLine(string.Format("{0,-5} {1,-20} {2,-15} {3,-10}", n, Ingredients[i], $"{Quantities[i]} {Measurements[i]}", $"{Calories[i]} Calories"));
-            }  
-            
+
+                finalString.AppendLine(string.Format("{0,-5} {1,-20} {2,-15} {3,-35} {4,-10}",
+                    n,
+                    Ingredients[i],
+                    $"{Quantities[i]} {Measurements[i]}",
+                    FoodGroup[i],
+                    $"{Calories[i]} Calories"));
+            }
+            double totalCalories = Recipe.listTotal( Calories);
+            string color;
+
+            if (totalCalories <= 299)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+            }
+            else if (totalCalories <= 499)
+            {
+                Console.ForegroundColor= ConsoleColor.Yellow;
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+            }
+
+            finalString.AppendLine("\n"+"Total Calories: "+totalCalories);
+            Console.ForegroundColor = ConsoleColor.White;
+
 
             finalString.AppendLine("\nRecipe Steps: ");
-            for (int i = 0; i < RecipeSteps.Length; i++)
+            for (int i = 0; i < RecipeSteps.Count; i++)
             {
                 int n = i + 1;
-                finalString.AppendLine("Step " + n + ": " + RecipeSteps.GetValue(i));
+                finalString.AppendLine("Step " + n + ": " + RecipeSteps[i]);
 
             }
 
@@ -61,7 +84,7 @@ namespace PROGPOE
         public static void Scale(double currentScale, Recipe myRecipe, double newScale)
         {
 
-            for (int i = 0; i < myRecipe.Quantities.Length; i++)
+            for (int i = 0; i < myRecipe.Quantities.Count; i++)
             {
                 myRecipe.Quantities[i] /= currentScale;
                 myRecipe.Calories[i] /= currentScale;   
@@ -75,7 +98,7 @@ namespace PROGPOE
         {
 
 
-            for (int i = 0; i < anObj.Ingredients.Length; i++)
+            for (int i = 0; i < anObj.Ingredients.Count; i++)
             {
 
 
@@ -149,5 +172,6 @@ namespace PROGPOE
         
         
         }
+        
     }
 }
