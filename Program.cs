@@ -17,9 +17,9 @@ namespace PROGPOE
          static void CalorieWarning(double a)
         {
 
-            if (a > 500)
+            if (a > 300)
             {
-                MessageBox.Show("Warning: We have now exceeded 500 calories \nCurrent calorie count : " + a);
+                MessageBox.Show("Warning: We have now exceeded 300 calories \nCurrent calorie count : " + a);
 
                 Console.WriteLine("Press any key to continue.");
                 Console.ReadKey();
