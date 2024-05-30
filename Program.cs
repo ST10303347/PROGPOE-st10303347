@@ -9,21 +9,43 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace PROGPOE
 {
+
+
+    public delegate void AlertDelegate(double a);
     internal class Program
     {
-        static void Main(string[] args)
+         static void CalorieWarning(double a)
         {
 
-            //Declarations   
-            Boolean screenON = true;
+            if (a > 500)
+            {
+                MessageBox.Show("Warning: We have now exceeded 500 calories \nCurrent calorie count : " + a);
+
+                Console.WriteLine("Press any key to continue.");
+                Console.ReadKey();
+            }
+
+
+
+            
+
+        }
+        
+
+        static void Main(string[] args)
+        {
+            
+        //Declarations   
+        Boolean screenON = true;
             List<String> emptyarr = new List<string> { };
             List<double> emptyarr2 = new List<double>();
             Recipe testOB = new Recipe(" ", emptyarr, emptyarr2, emptyarr, emptyarr, emptyarr2, emptyarr);
             double scale = 1;
             double newScale = 1;
             List<string> FoodGroups = new List<string>() { "Starchy foods", "Vegetables and fruits", "Dry beans, peas, lentils and soya", "Chicken, fish, meat and eggs", "Milk and dairy products", "Fats and oil", "Water", };
-            String Foodgroupmsg = ("Enter which Food hroup this ingredient belongs to: \n1.Starchy foods\n2.Vegetables and fruits\n3.Dry beans, peas, lentils and soya\n4.Chicken, fish, meat and eggs\n5.Milk and dairy products\n6.Fats and oil, and\n7.Water");
-
+            String Foodgroupmsg = ("Enter which Food group this ingredient belongs to: \n1.Starchy foods\n2.Vegetables and fruits\n3.Dry beans, peas, lentils and soya\n4.Chicken, fish, meat and eggs\n5.Milk and dairy products\n6.Fats and oil, and\n7.Water");
+            
+         AlertDelegate alert = CalorieWarning;
 
             //Starts Here
 
@@ -77,23 +99,17 @@ namespace PROGPOE
 
                             double ingCalories = InputMethods.QuantityandCalorieValid("Please enter the number of calories for this item", "Calories");
                             CaloriesArr.Add(ingCalories);
+                            totalCalories += CaloriesArr[i]; // Update the total calories
+                            alert(totalCalories);
 
-                           
-                           Console.WriteLine(Foodgroupmsg);
-                            int ingfoodgroup = InputMethods.numbervalidation("Please pick a number from the provided list", 1,7);
+                            Console.WriteLine(Foodgroupmsg);
+                            int ingfoodgroup = InputMethods.numbervalidation("Please pick a number from the provided list", 1, 7);
                             ingfoodgroup--;
                             foodGroup.Add(FoodGroups[ingfoodgroup]);
 
-                            totalCalories += CaloriesArr[i]; // Update the total calories
-
+                          
                             // Check if totalCalories exceed 500 and display a warning message through a popup window
-                            if (totalCalories > 500)
-                            {
-                                MessageBox.Show("Warning: We have now exceeded 500 calories \nCurrent calorie count : " + totalCalories);
 
-                                Console.WriteLine("Press any key to continue.");
-                                Console.ReadKey();
-                            }
                             Console.Clear();
 
                         }
@@ -149,12 +165,13 @@ namespace PROGPOE
                         Console.ReadKey();
                         break;
                     case 3:
-                        if (ListWork.recipeList.Count > 0) {
+                        if (ListWork.recipeList.Count > 0)
+                        {
 
                             newScale = 1;
-                            
+
                             scale = newScale;
-                            
+
                             Console.WriteLine("Welcome to scaling! Pick a recipe to Scale\n");
                             var sortedRecipes = ListWork.recipeList.OrderBy(r => r.RecipeName).ToList();
                             Recipe.DisplayList(sortedRecipes);
@@ -216,7 +233,8 @@ namespace PROGPOE
                             Console.WriteLine(testOB.ToString());
 
                         }
-                        else {
+                        else
+                        {
 
                             Console.WriteLine("You have not Created a recipe yet");
                         }
@@ -225,17 +243,18 @@ namespace PROGPOE
                         Console.WriteLine("Press any key to continue.");
                         Console.ReadKey();
 
-                
-            
+
+
 
 
 
 
                         break;
-                    case 4: 
-                        
-                   
-                        if (ListWork.recipeList.Count > 0) {
+                    case 4:
+
+
+                        if (ListWork.recipeList.Count > 0)
+                        {
                             Console.WriteLine("Welcome to scaling! Pick a recipe to Delete\n");
                             var sortedRecipes = ListWork.recipeList.OrderBy(r => r.RecipeName).ToList();
                             Recipe.DisplayList(sortedRecipes);
@@ -249,7 +268,8 @@ namespace PROGPOE
 
 
                         }
-                        else {
+                        else
+                        {
 
 
                             Console.WriteLine("NO RECIPES TO DELETE");
@@ -263,9 +283,9 @@ namespace PROGPOE
                         Console.WriteLine("Have an amazing day ;)");
                         System.Environment.Exit(0);
                         break;
-                    
+
                 }
-                }
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Xml.Serialization;
 
 namespace PROGPOE
@@ -27,6 +28,10 @@ namespace PROGPOE
             RecipeSteps = recipeSteps;
             Calories = calories;
             FoodGroup = foodGroup;
+        }
+
+        public Recipe()
+        {
         }
 
         public override string ToString()
@@ -168,10 +173,11 @@ namespace PROGPOE
 
             }
         return total;
-        
-        
-        
+
+
+
         }
-        
-    }
+       
+
+}
 }
